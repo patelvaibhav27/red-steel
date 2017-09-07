@@ -1,4 +1,4 @@
-# Laravel API Boilerplate
+## Laravel API Boilerplate (JWT Edition)
 
 Laravel API Boilerplate is a "starter kit" you can use to build your first API in seconds. As you can easily imagine, it is built on top of the awesome Laravel Framework. This version is built on Laravel 5.4!
 
@@ -12,10 +12,23 @@ What I made is an integration of these three packages and a setup of some authen
 
 ## Installation
 
-1. run `git clone https://github.com/patelvaibhav27/red-steel.git`;
+1. run `composer create-project francescomalatesta/laravel-api-boilerplate-jwt myNextProject`
 2. have a coffee, nothing to do here;
-
+```
+$ composer install 
+```
 Once the project creation procedure will be completed, run the `php artisan migrate` command to install the required tables.
+
+## Usage
+
+I wrote a couple of articles on this project that explain how to write an entire sample application with this boilerplate. They cover the older version of this boilerplate, but all the concepts are the same. You can find them on Sitepoint:
+
+Just be aware that some options in the `config/boilerplate.php` file are changed, so take a look to it.
+
+* [How to Build an API-Only JWT-Powered Laravel App](https://www.sitepoint.com/how-to-build-an-api-only-jwt-powered-laravel-app/)
+* [How to Consume Laravel API with AngularJS](https://www.sitepoint.com/how-to-consume-laravel-api-with-angularjs/)
+
+**WARNING:** the articles are old and Laravel 5.1 related. Just use them as "inspiration". Even without updated tutorials, they should be enough. 
 
 ## Main Features
 
@@ -37,17 +50,6 @@ All the API routes can be found in the `routes/api.php` file. This also follow t
 ### Secrets Generation
 
 Every time you create a new project starting from this repository, the _php artisan jwt:generate_ command will be executed.
-
-## Configuration
-
-As I already said before, this boilerplate is based on _dingo/api_ and _tymondesigns/jwt-auth_ packages. So, you can find many informations about configuration <a href="https://github.com/tymondesigns/jwt-auth/wiki/Configuration" target="_blank">here</a> and <a href="https://github.com/dingo/api/wiki/Configuration">here</a>.
-
-However, there are some extra options that I placed in a _config/boilerplate.php_ file:
-
-* `sign_up.release_token`: set it to `true` if you want your app release the token right after the sign up process;
-* `reset_password.release_token`: set it to `true` if you want your app release the token right after the password reset process;
-
-There are also the validation rules for every action (login, sign up, recovery and reset). Feel free to customize it for your needs.
 
 ## Creating Endpoints
 

@@ -9,7 +9,9 @@
         "laravel/framework": "5.4.*",
         "tymon/jwt-auth": "^0.5.9",
         "dingo/api": "1.0.x@dev",
-        "barryvdh/laravel-cors": "^0.8.2"
+        "barryvdh/laravel-cors": "^0.8.2",
+        "maatwebsite/excel": "~2.1.0",
+        "dompdf/dompdf": "~0.6.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

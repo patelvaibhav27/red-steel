@@ -38,6 +38,7 @@ $api->version('v1', function (Router $api) {
         $api->post('books', 'App\\Api\\V1\\Controllers\\BookController@store');
         $api->put('books/{id}', 'App\\Api\\V1\\Controllers\\BookController@update');
         $api->delete('books/{id}', 'App\\Api\\V1\\Controllers\\BookController@destroy');
+        $api->get('downloadExcel/{type}', 'App\\Api\\V1\\Controllers\\BookController@downloadExcel');
     });
 
     $api->get('hello', function() {

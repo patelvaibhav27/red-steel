@@ -180,6 +180,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        'Maatwebsite\Excel\ExcelServiceProvider',
     ],
 
     /*
@@ -232,6 +233,8 @@ return [
          * Package Facades...
          */
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+
+        'Excel' => 'Maatwebsite\Excel\Facades\Excel',
     ],
 
 ];

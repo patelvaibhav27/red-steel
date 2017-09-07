@@ -152,4 +152,48 @@ class BookController extends Controller
         else
             return $this->response->error('could_not_delete_book', 500);
     }
+
+    public function downloadExcel($type)
+    {
+        $contactTypes = Book::get()->toArray();
+        $contactTypesArray = [];
+        // Define the Excel spreadsheet headers
+        $contactTypesArray[] = ['NAME','TITLE','AUTHER NAME','PAGE COUNT','IMAGE PATH','BOOK CAT ID','USER ID','CREATED','UPDATED'];
+        foreach ($contactTypes as $contactType) {
+            $contactTypesArray[] = $contactType;
+        }
+        if($type == 'excel'){
+            Excel::create('ContactTypes', function($excel) use ($contactTypesArray) {
+                $excel->setTitle('ContactTypes');
+                $excel->setCreator('Auther-Name')->setCompany('Company-Name');
+                $excel->setDescription('ContactTypes');
+                $excel->sheet('ContactTypes', function($sheet)  use ($contactTypesArray) {
+                    $sheet->fromArray($contactTypesArray, null, 'A1', false, false);
+                });
+            })->store('xls');
+            return response()->json([
+                'status' => 'ok',
+                'path' => 'http://'.\Request::server('HTTP_HOST').'/exports/ContactTypes.xls'
+            ], 201);
+        } elseif($type == 'pdf'){
+            Excel::create('ContactTypes', function($excel) use ($contactTypesArray) {
+                $excel->setTitle('ContactTypes');
+                $excel->setCreator('Auther-Name')->setCompany('Company-Name');
+                $excel->setDescription('ContactTypes');
+                $excel->sheet('ContactTypes', function($sheet)  use ($contactTypesArray) {
+                    $sheet->fromArray($contactTypesArray, null, 'A1', false, false);
+                });
+            })->store('pdf');
+            return response()->json([
+
+                'status' => 'ok',
+                'path' => 'http://'.\Request::server('HTTP_HOST').'/exports/ContactTypes.pdf'
+            ], 201);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'path' => 'Undefined type.'
+            ], 400);
+        }
+    }
 }
