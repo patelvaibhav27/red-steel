@@ -18,16 +18,41 @@ class SignUpController extends Controller
             throw new HttpException(500);
         }
 
-        if(!Config::get('boilerplate.sign_up.release_token')) {
+        /*if(!Config::get('boilerplate.sign_up.release_token')) {
             return response()->json([
                 'status' => 'ok'
             ], 201);
-        }
+        }*/
 
         $token = $JWTAuth->fromUser($user);
         return response()->json([
             'status' => 'ok',
             'token' => $token
         ], 201);
+
+        $signupFields = Config::get('boilerplate.signup_fields');
+        $hasToReleaseToken = Config::get('boilerplate.signup_token_release');
+
+        $userData = $request->only($signupFields);
+
+        $validator = Validator::make($userData, Config::get('boilerplate.signup_fields_rules'));
+
+        if($validator->fails()) {
+            throw new ValidationHttpException($validator->errors()->all());
+        }
+
+        User::unguard();
+        $user = User::create($userData);
+        User::reguard();
+
+        if(!$user->id) {
+            return $this->response->error('could_not_create_user', 500);
+        }
+
+        if($hasToReleaseToken) {
+            return $this->login($request);
+        }
+
+        return $this->response->created();
     }
 }

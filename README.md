@@ -12,7 +12,7 @@ What I made is an integration of these three packages and a setup of some authen
 
 ## Installation
 
-1. run `composer create-project patelvaibhav27/red-steel myProject`;
+1. run `git clone https://github.com/patelvaibhav27/red-steel.git`;
 2. have a coffee, nothing to do here;
 
 Once the project creation procedure will be completed, run the `php artisan migrate` command to install the required tables.
