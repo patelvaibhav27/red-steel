@@ -2,6 +2,7 @@
 /public/storage
 /storage/*.key
 /vendor
+/storage/img
 /.idea
 Homestead.json
 Homestead.yaml

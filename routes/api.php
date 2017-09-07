@@ -31,6 +31,15 @@ $api->version('v1', function (Router $api) {
         ]);
     });
 
+    //book route
+    $api->group(['middleware' => 'jwt.auth'], function ($api) {
+        $api->get('books', 'App\\Api\\V1\\Controllers\\BookController@index');
+        $api->get('books/{id}', 'App\\Api\\V1\\Controllers\\BookController@show');
+        $api->post('books', 'App\\Api\\V1\\Controllers\\BookController@store');
+        $api->put('books/{id}', 'App\\Api\\V1\\Controllers\\BookController@update');
+        $api->delete('books/{id}', 'App\\Api\\V1\\Controllers\\BookController@destroy');
+    });
+
     $api->get('hello', function() {
         return response()->json([
             'message' => 'This is a simple example of item returned by your APIs. Everyone can see it.'
