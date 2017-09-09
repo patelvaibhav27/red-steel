@@ -20,6 +20,7 @@ class ForgotPasswordController extends Controller
         }
 
         $broker = $this->getPasswordBroker();
+
         $sendingResponse = $broker->sendResetLink($request->only('email'));
 
         if($sendingResponse !== Password::RESET_LINK_SENT) {
